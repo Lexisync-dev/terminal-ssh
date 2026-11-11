@@ -78,8 +78,8 @@ func (m BootModel) View() string {
 	// Header banner
 	header := lipgloss.NewStyle().
 		Bold(true).
-		Foreground(ui.ColorPrimary).
-		Render("  JAWAD.OS v1.0.0")
+		Foreground(ui.ColorAccent).
+		Render("  JAWAD.OS")
 	b.WriteString("\n" + header + "\n\n")
 
 	// Steps sequence
@@ -99,12 +99,11 @@ func (m BootModel) View() string {
 	if m.step >= m.totalSteps {
 		welcome := lipgloss.NewStyle().
 			Bold(true).
-			Foreground(ui.ColorSecondary).
+			Foreground(ui.ColorText).
 			Render("\n  Welcome to JAWAD.OS\n")
 
 		tagline := lipgloss.NewStyle().
-			Foreground(ui.ColorText).
-			Italic(true).
+			Foreground(ui.ColorMuted).
 			Render("  A developer exploring systems,\n  building software, and learning how things work.\n")
 
 		prompt := lipgloss.NewStyle().

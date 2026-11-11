@@ -8,7 +8,7 @@ import (
 )
 
 var (
-	// Panel Styles: Structured workstation panels with crisp single borders
+	// Panel Styles: Minimalist panels with subtle single rounded borders
 	PanelStyle = lipgloss.NewStyle().
 			Border(WorkstationPanelBorder).
 			BorderForeground(ColorBorder).
@@ -27,30 +27,27 @@ var (
 				Background(ColorSurfaceElevated).
 				Padding(0, 1)
 
-	// Header Styles: Bloomberg institutional top bar
+	// Header Styles: Minimalist top bar
 	HeaderStyle = lipgloss.NewStyle().
 			Background(ColorSurface).
 			Foreground(ColorTextPrimary).
 			Bold(true).
 			Padding(0, 1)
 
-	// Navigation Tickers: Compact numbered modules
+	// Navigation Tickers: Minimalist text navigation tabs
 	NavTabStyle = lipgloss.NewStyle().
 			Foreground(ColorTextSecondary).
-			Background(ColorBg).
 			Padding(0, 1)
 
 	NavTabActiveStyle = lipgloss.NewStyle().
-				Foreground(ColorBg).
-				Background(ColorAccentAmber).
+				Foreground(ColorAccentAmber).
 				Bold(true).
 				Padding(0, 1)
 
-	// Data Table Styles: Compact technical records
+	// Data Table Styles: Clean, understated records
 	TableHeaderStyle = lipgloss.NewStyle().
 				Bold(true).
-				Foreground(ColorAccentAmber).
-				Background(ColorSurfaceElevated).
+				Foreground(ColorTextSecondary).
 				Padding(0, 1)
 
 	TableRowStyle = lipgloss.NewStyle().
@@ -60,7 +57,6 @@ var (
 	TableRowSelectedStyle = lipgloss.NewStyle().
 				Bold(true).
 				Foreground(ColorAccentAmber).
-				Background(ColorSurfaceElevated).
 				Padding(0, 1)
 
 	// Command Prompt: Terminal input bar
@@ -91,33 +87,25 @@ var (
 	FooterKeyDesc = lipgloss.NewStyle().
 			Foreground(ColorTextSecondary)
 
-	// Metadata & Tag Pill Badges
+	// Metadata & Tag Badges: Clean, minimal tags without chunky background blocks
 	TagStyle = lipgloss.NewStyle().
 			Foreground(ColorInfoCyan).
-			Background(ColorSurfaceElevated).
-			Padding(0, 1).
 			MarginRight(1)
 
 	TagAmberStyle = lipgloss.NewStyle().
 			Foreground(ColorAccentAmber).
-			Background(ColorSurfaceElevated).
-			Padding(0, 1).
 			MarginRight(1)
 
 	StatusPillActive = lipgloss.NewStyle().
-				Foreground(ColorBg).
-				Background(ColorSuccessGreen).
-				Bold(true).
-				Padding(0, 1)
+				Foreground(ColorSuccessGreen).
+				Bold(true)
 
 	StatusPillDev = lipgloss.NewStyle().
-			Foreground(ColorBg).
-			Background(ColorAccentAmber).
-			Bold(true).
-			Padding(0, 1)
+			Foreground(ColorAccentAmber).
+			Bold(true)
 )
 
-// RenderWorkstationPanel wraps content inside a sharp workstation frame with an optional title.
+// RenderWorkstationPanel wraps content inside a clean frame with an optional title.
 func RenderWorkstationPanel(title string, content string, width, height int, active bool) string {
 	style := PanelStyle.Width(width)
 	if active {
@@ -132,7 +120,7 @@ func RenderWorkstationPanel(title string, content string, width, height int, act
 	}
 
 	headerTag := StylePanelHeading.Render(strings.ToUpper(title))
-	dividerLen := width - lipgloss.Width(headerTag) - 4
+	dividerLen := width - lipgloss.Width(headerTag) - 6
 	if dividerLen < 0 {
 		dividerLen = 0
 	}
@@ -140,29 +128,31 @@ func RenderWorkstationPanel(title string, content string, width, height int, act
 		Foreground(ColorBorder).
 		Render(strings.Repeat(GlyphHLine, dividerLen))
 
-	headerLine := headerTag + " " + topDivider
+	headerLine := headerTag + "  " + topDivider
 
 	body := lipgloss.JoinVertical(
 		lipgloss.Left,
 		headerLine,
+		"",
 		content,
 	)
 
 	return style.Render(body)
 }
 
-// RenderKeyValue formats a technical label and value with aligned columns.
+// RenderKeyValue formats a label and value with aligned columns and clean spacing.
 func RenderKeyValue(label, value string, labelWidth int) string {
 	lbl := StyleMetaLabel.Width(labelWidth).Render(label)
 	val := StyleMetaValue.Render(value)
 	return fmt.Sprintf("%s %s", lbl, val)
 }
 
-// RenderTags formats multiple items into institutional badges.
+// RenderTags formats multiple items into clean, minimalist tags.
 func RenderTags(tags []string) string {
 	var rendered []string
 	for _, t := range tags {
 		rendered = append(rendered, TagStyle.Render(t))
 	}
-	return strings.Join(rendered, " ")
+	return strings.Join(rendered, "· ")
 }
+

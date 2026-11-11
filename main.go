@@ -71,13 +71,13 @@ func runSSHServer(cfg *config.PortfolioConfig, host, port, keyPath string) {
 		os.Exit(1)
 	}
 
-	fmt.Printf("┌────────────────────────────────────────────────────────┐\n")
+	fmt.Printf("╭────────────────────────────────────────────────────────╮\n")
 	fmt.Printf("│ JAWAD.OS SSH SERVER                                    │\n")
 	fmt.Printf("├────────────────────────────────────────────────────────┤\n")
 	fmt.Printf("│ Listening on: %-40s │\n", srv.Addr())
 	fmt.Printf("│ Connect with: ssh %-36s │\n", "localhost -p "+port)
 	fmt.Printf("│ Press Ctrl+C to shut down gracefully                   │\n")
-	fmt.Printf("└────────────────────────────────────────────────────────┘\n")
+	fmt.Printf("╰────────────────────────────────────────────────────────╯\n")
 
 	done := make(chan os.Signal, 1)
 	signal.Notify(done, os.Interrupt, syscall.SIGTERM)

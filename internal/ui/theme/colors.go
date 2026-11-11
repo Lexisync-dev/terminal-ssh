@@ -4,36 +4,37 @@ import (
 	"github.com/charmbracelet/lipgloss"
 )
 
-// Terminal Color Tokens for Bloomberg-Inspired Engineering Workstation.
-// The palette emphasizes information density, visual hierarchy, and institutional precision.
+// Terminal Color Tokens for Minimalist Terminal Interface.
+// The palette emphasizes visual restraint, typographic hierarchy, and serene clarity.
 var (
-	// Background: Main terminal canvas
-	ColorBg = lipgloss.Color("#101214")
+	// Background: Deep charcoal canvas
+	ColorBg = lipgloss.Color("#0E1013")
 
-	// Surface: Primary panels & information tables
-	ColorSurface = lipgloss.Color("#181B1E")
+	// Surface: Primary panels & subtle content cards
+	ColorSurface = lipgloss.Color("#13161B")
 
-	// Surface Elevated: Secondary panels, active table rows, modals
-	ColorSurfaceElevated = lipgloss.Color("#202428")
+	// Surface Elevated: Elevated panels, active rows, focused cards
+	ColorSurfaceElevated = lipgloss.Color("#1A1E24")
 
-	// Border: Separators, structural dividers, and grid lines
-	ColorBorder = lipgloss.Color("#343A40")
+	// Border: Subtle, low-contrast boundary lines
+	ColorBorder = lipgloss.Color("#252A31")
 
-	// Primary Text: Main content, labels, and values
-	ColorTextPrimary = lipgloss.Color("#E6E8E9")
+	// Primary Text: Crisp, high-readability content
+	ColorTextPrimary = lipgloss.Color("#ECEFF1")
 
-	// Secondary Text: Metadata, timestamps, shortcuts, secondary hints
-	ColorTextSecondary = lipgloss.Color("#92999F")
+	// Secondary Text: Muted labels, secondary descriptions, shortcuts
+	ColorTextSecondary = lipgloss.Color("#7E8691")
 
-	// Accent Amber: Primary highlight, active navigation, tickers, important markers
+	// Accent Amber: Focused highlight, active navigation, precise markers
 	ColorAccentAmber = lipgloss.Color("#F0A52B")
 
-	// Success Green: Healthy status, online indicator, completed records
+	// Success Green: Status indicators, confirmations
 	ColorSuccessGreen = lipgloss.Color("#76B88A")
 
-	// Info Cyan: Technical metadata, architectural tags, stack types
-	ColorInfoCyan = lipgloss.Color("#67B8C8")
+	// Info Cyan: Technical tags and metadata
+	ColorInfoCyan = lipgloss.Color("#6FAFC7")
 
-	// Warning / Error: Alert status, development flags, error indicators
-	ColorWarning = lipgloss.Color("#D97757")
+	// Warning / Error: Alert indicators
+	ColorWarning = lipgloss.Color("#D4775E")
 )
+

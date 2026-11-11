@@ -75,7 +75,7 @@ func (m ExperienceModel) renderContent(width int) string {
 		"",
 		summaryText,
 	)
-	b.WriteString(theme.RenderWorkstationPanel("CANDIDATE DISPOSITION", bannerContent, width, 0, false) + "\n\n")
+	b.WriteString(theme.RenderWorkstationPanel("STATUS", bannerContent, width, 0, false) + "\n\n")
 
 	// Chronological Engineering Ledger
 	milestones := []struct {
@@ -84,22 +84,22 @@ func (m ExperienceModel) renderContent(width int) string {
 		Body  string
 	}{
 		{
-			Tag:   "[MILESTONE 01 // ACADEMIC]",
+			Tag:   "01",
 			Title: "Computer Science Education",
 			Body:  "Undergraduate computer science student in Pakistan. Rigorous focus on algorithms, data structures, operating systems, database internals, and distributed architecture fundamentals.",
 		},
 		{
-			Tag:   "[MILESTONE 02 // APPLIED]",
+			Tag:   "02",
 			Title: "Independent Freelance Software Projects",
 			Body:  "Built and shipped freelance software solutions. Handled end-to-end development lifecycles, user requirements, database design, and shipping working web services.",
 		},
 		{
-			Tag:   "[MILESTONE 03 // SYSTEMS EXPLORATION]",
+			Tag:   "03",
 			Title: "Self-Directed Systems Building & Tooling",
 			Body:  "Invested deep focus into systems architecture, building workflow automation engines, evaluating queue patterns (Redis), and developing terminal operating environments in Go.",
 		},
 		{
-			Tag:   "[MILESTONE 04 // OBJECTIVE]",
+			Tag:   "04",
 			Title: "Pursuing First Formal Software Engineering Role",
 			Body:  "Actively seeking full-stack and backend software engineering opportunities. Ready to contribute production code, understand existing architectures, and grow under senior engineering mentorship.",
 		},
@@ -107,30 +107,30 @@ func (m ExperienceModel) renderContent(width int) string {
 
 	var ledgerLines []string
 	for _, ms := range milestones {
-		tag := theme.StyleBrand.Render(ms.Tag)
+		tag := theme.StyleBrand.Render("[" + ms.Tag + "]")
 		title := theme.StyleIdentity.Render(ms.Title)
 		body := theme.StyleBodyMuted.Width(width - 8).Render(ms.Body)
 
 		entry := lipgloss.JoinVertical(
 			lipgloss.Left,
-			tag+" "+title,
+			tag+"  "+title,
 			body,
 		)
 		ledgerLines = append(ledgerLines, entry)
 	}
 
 	ledgerContent := strings.Join(ledgerLines, "\n\n"+theme.RenderDivider(width-6)+"\n\n")
-	b.WriteString(theme.RenderWorkstationPanel("CHRONOLOGICAL ENGINEERING LEDGER", ledgerContent, width, 0, false) + "\n\n")
+	b.WriteString(theme.RenderWorkstationPanel("JOURNEY & MILESTONES", ledgerContent, width, 0, false) + "\n\n")
 
 	// Candidate Capabilities & Attributes
 	attributes := []string{
-		"• High Intrinsic Curiosity: Deep desire to understand how systems operate under the surface.",
-		"• Fast Execution & Iteration: Learning by building, breaking, and methodically improving solutions.",
-		"• Pragmatic Architecture: Preference for clean, maintainable modular design over accidental complexity.",
-		"• Growth Mindset: Eagerness to absorb feedback and adapt to team engineering standards.",
+		"· High Intrinsic Curiosity: Deep desire to understand how systems operate under the surface.",
+		"· Fast Execution & Iteration: Learning by building, breaking, and methodically improving solutions.",
+		"· Pragmatic Architecture: Preference for clean, maintainable modular design over accidental complexity.",
+		"· Growth Mindset: Eagerness to absorb feedback and adapt to team engineering standards.",
 	}
 	attrContent := theme.StyleBody.Width(width - 6).Render(strings.Join(attributes, "\n\n"))
-	b.WriteString(theme.RenderWorkstationPanel("TEAM CAPABILITIES & ATTRIBUTES", attrContent, width, 0, false) + "\n")
+	b.WriteString(theme.RenderWorkstationPanel("CAPABILITIES & ATTRIBUTES", attrContent, width, 0, false) + "\n")
 
 	return b.String()
 }

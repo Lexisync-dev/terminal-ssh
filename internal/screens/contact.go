@@ -140,15 +140,15 @@ func (m ContactModel) renderContent(width int) string {
 
 	// Top Prompt
 	promptText := theme.StyleBody.Width(width - 6).Render(
-		"COMMUNICATIONS CONSOLE // Open to discussions regarding software engineering roles, backend systems architecture, and technical collaboration.",
+		"Open to discussions regarding software engineering roles, backend systems architecture, and technical collaboration.",
 	)
-	b.WriteString(theme.RenderWorkstationPanel("DISPATCH NOTICE", promptText, width, 0, false) + "\n\n")
+	b.WriteString(theme.RenderWorkstationPanel("CONTACT & AVAILABILITY", promptText, width, 0, false) + "\n\n")
 
 	// Channels Data Table
-	headerCh := theme.TableHeaderStyle.Width(6).Render("CH")
+	headerCh := theme.TableHeaderStyle.Width(6).Render("ID")
 	headerProto := theme.TableHeaderStyle.Width(16).Render("PROTOCOL")
 	headerLabel := theme.TableHeaderStyle.Width(14).Render("CHANNEL")
-	headerVal := theme.TableHeaderStyle.Render("ENDPOINT / VALUE")
+	headerVal := theme.TableHeaderStyle.Render("ENDPOINT")
 
 	headerRow := lipgloss.JoinHorizontal(
 		lipgloss.Left,
@@ -174,7 +174,7 @@ func (m ContactModel) renderContent(width int) string {
 		valCell := theme.TableRowStyle.Render(item.Value)
 
 		if isSelected {
-			chCell = theme.TableRowSelectedStyle.Width(6).Render(theme.GlyphBullet + " " + chStr)
+			chCell = theme.TableRowSelectedStyle.Width(6).Render("● " + chStr)
 			protoCell = theme.TableRowSelectedStyle.Width(16).Render(item.Protocol)
 			labelCell = theme.TableRowSelectedStyle.Width(14).Render(item.Label)
 			valCell = theme.TableRowSelectedStyle.Render(item.Value)
@@ -193,20 +193,20 @@ func (m ContactModel) renderContent(width int) string {
 		rows = append(rows, row)
 	}
 
-	hintText := theme.StyleBodyMuted.Render("\n[Select channel with ↑↓ or j/k, press ENTER to copy value via OSC 52]")
+	hintText := theme.StyleBodyMuted.Render("\n[Select channel with ↑↓ or j/k, press ENTER to copy value]")
 	tableContent := strings.Join(rows, "\n") + "\n" + hintText
 
-	channelsPanel := theme.RenderWorkstationPanel("COMMUNICATION CHANNELS", tableContent, width, 0, true)
+	channelsPanel := theme.RenderWorkstationPanel("CHANNELS", tableContent, width, 0, true)
 	b.WriteString(channelsPanel + "\n\n")
 
 	// Availability & Guidelines
 	guidelines := []string{
-		"• Candidate Availability: Actively interviewing for Software Engineer / Full-Stack / Backend positions.",
-		"• Preferred Topics: System design, distributed workflows, backend API engineering, infrastructure.",
-		"• Direct Response: Direct messages on GitHub or direct contact inquiries receive prompt replies.",
+		"· Candidate Availability: Actively interviewing for Software Engineer / Full-Stack / Backend positions.",
+		"· Preferred Topics: System design, distributed workflows, backend API engineering, infrastructure.",
+		"· Direct Response: Direct inquiries via GitHub or email receive prompt replies.",
 	}
 	policyText := theme.StyleBodyMuted.Width(width - 6).Render(strings.Join(guidelines, "\n\n"))
-	b.WriteString(theme.RenderWorkstationPanel("DISPOSITION & PROTOCOL", policyText, width, 0, false) + "\n")
+	b.WriteString(theme.RenderWorkstationPanel("PROTOCOL & AVAILABILITY", policyText, width, 0, false) + "\n")
 
 	return b.String()
 }

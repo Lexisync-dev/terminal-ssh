@@ -6,18 +6,18 @@ import (
 	"github.com/charmbracelet/lipgloss"
 )
 
-// Sharp single-line border definitions matching Bloomberg & engineering workstations.
+// Minimalist single-line and rounded border definitions.
 var (
-	// WorkstationPanelBorder uses clean single-line boundaries without rounded corners.
+	// WorkstationPanelBorder uses clean rounded boundaries for a modern, minimalist frame.
 	WorkstationPanelBorder = lipgloss.Border{
 		Top:         "─",
 		Bottom:      "─",
 		Left:        "│",
 		Right:       "│",
-		TopLeft:     "┌",
-		TopRight:    "┐",
-		BottomLeft:  "└",
-		BottomRight: "┘",
+		TopLeft:     "╭",
+		TopRight:    "╮",
+		BottomLeft:  "╰",
+		BottomRight: "╯",
 	}
 
 	WorkstationHeaderBorder = lipgloss.Border{
@@ -29,7 +29,7 @@ var (
 	}
 )
 
-// Box drawing glyph constants for precision tabular layouts
+// Box drawing and minimalist typographic glyph constants
 const (
 	GlyphHLine     = "─"
 	GlyphVLine     = "│"
@@ -38,17 +38,17 @@ const (
 	GlyphBottomT   = "┴"
 	GlyphLeftT     = "├"
 	GlyphRightT    = "┤"
-	GlyphTopLeft   = "┌"
-	GlyphTopRight  = "┐"
-	GlyphBotLeft   = "└"
-	GlyphBotRight  = "┘"
-	GlyphBullet    = "▸"
-	GlyphCheck     = "✔"
+	GlyphTopLeft   = "╭"
+	GlyphTopRight  = "╮"
+	GlyphBotLeft   = "╰"
+	GlyphBotRight  = "╯"
+	GlyphBullet    = "·"
+	GlyphCheck     = "✓"
 	GlyphLightning = "⚡"
 	GlyphDot       = "●"
 )
 
-// RenderDivider returns a full-width horizontal divider line.
+// RenderDivider returns a full-width subtle horizontal divider line.
 func RenderDivider(width int) string {
 	if width <= 0 {
 		return ""
@@ -57,3 +57,4 @@ func RenderDivider(width int) string {
 		Foreground(ColorBorder).
 		Render(strings.Repeat(GlyphHLine, width))
 }
+

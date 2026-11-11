@@ -67,14 +67,14 @@ func (m InterestsModel) renderContent(width int) string {
 
 	// Top Editorial Intro
 	introText := theme.StyleBodyMuted.Width(width - 6).Render(
-		"EDITORIAL // Personal pursuits, physical engineering curiosity, and creative expression beyond software.",
+		"Personal pursuits, physical engineering curiosity, and creative expression beyond software.",
 	)
-	b.WriteString(theme.RenderWorkstationPanel("BEYOND THE TERMINAL", introText, width, 0, false) + "\n\n")
+	b.WriteString(theme.RenderWorkstationPanel("INTERESTS & PURSUITS", introText, width, 0, false) + "\n\n")
 
-	// Render each interest item in a workstation panel
+	// Render each interest item in a minimalist panel
 	for i, item := range m.cfg.Interests.Items {
 		itemNum := strings.ToUpper(theme.StyleBrand.Render(item.Icon + " "))
-		tagline := theme.StyleSectionHeading.Render(strings.ToUpper(item.Tagline))
+		tagline := theme.StyleSectionHeading.Render(item.Tagline)
 		desc := theme.StyleBody.Width(width - 6).Render(item.Description)
 
 		content := lipgloss.JoinVertical(
@@ -86,13 +86,13 @@ func (m InterestsModel) renderContent(width int) string {
 
 		panelTitle := strings.ToUpper(item.Name)
 		if i == 0 {
-			panelTitle = "POETRY // CREATIVE EXPRESSION"
+			panelTitle = "POETRY"
 		} else if i == 1 {
-			panelTitle = "SUPERBIKES // TWO-WHEELED DYNAMICS"
+			panelTitle = "SUPERBIKES"
 		} else if i == 2 {
-			panelTitle = "MECHANICAL ENGINEERING // PHYSICAL SYSTEMS"
+			panelTitle = "MECHANICAL ENGINEERING"
 		} else if i == 3 {
-			panelTitle = "CURIOSITY // DECONSTRUCTING HOW THINGS WORK"
+			panelTitle = "CURIOSITY & EXPLORATION"
 		}
 
 		panel := theme.RenderWorkstationPanel(itemNum+panelTitle, content, width, 0, false)
@@ -103,7 +103,7 @@ func (m InterestsModel) renderContent(width int) string {
 	quote := theme.StyleBodyMuted.Italic(true).Width(width - 6).Render(
 		"\"The curiosity that drives mechanical tinkering and creative writing is the same mindset that makes for thoughtful software engineering.\"",
 	)
-	b.WriteString(theme.RenderWorkstationPanel("ENGINEERING REFLECTION", quote, width, 0, false) + "\n")
+	b.WriteString(theme.RenderWorkstationPanel("REFLECTION", quote, width, 0, false) + "\n")
 
 	return b.String()
 }

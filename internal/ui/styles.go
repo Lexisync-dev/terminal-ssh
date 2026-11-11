@@ -5,18 +5,18 @@ import (
 )
 
 var (
-	// Color Palette
-	ColorPrimary   = lipgloss.Color("#3FB950") // Muted Green
-	ColorSecondary = lipgloss.Color("#38BDF8") // Cyan
-	ColorAccent    = lipgloss.Color("#F59E0B") // Amber
-	ColorText      = lipgloss.Color("#E6EDF3") // Soft White
-	ColorMuted     = lipgloss.Color("#8B949E") // Muted Gray
-	ColorBorder    = lipgloss.Color("#30363D") // Slate Border
-	ColorBg        = lipgloss.Color("#0D1117") // Dark Terminal Bg
-	ColorDarkBg    = lipgloss.Color("#0D1117") // Deep dark background
-	ColorHighlight = lipgloss.Color("#56D364") // Bright Green Accent
-	ColorError     = lipgloss.Color("#F85149") // Red
-	ColorCodeBg    = lipgloss.Color("#161B22") // Subtle card bg
+	// Minimalist Color Palette
+	ColorPrimary   = lipgloss.Color("#76B88A") // Soft sage green
+	ColorSecondary = lipgloss.Color("#6FAFC7") // Muted cyan
+	ColorAccent    = lipgloss.Color("#F0A52B") // Warm amber
+	ColorText      = lipgloss.Color("#ECEFF1") // Crisp off-white
+	ColorMuted     = lipgloss.Color("#7E8691") // Muted slate
+	ColorBorder    = lipgloss.Color("#252A31") // Subtle border
+	ColorBg        = lipgloss.Color("#0E1013") // Deep charcoal
+	ColorDarkBg    = lipgloss.Color("#0E1013") // Deep charcoal
+	ColorHighlight = lipgloss.Color("#F0A52B") // Warm amber accent
+	ColorError     = lipgloss.Color("#D4775E") // Soft terracotta
+	ColorCodeBg    = lipgloss.Color("#13161B") // Subtle dark surface
 
 	// Core Layout Styles
 	DocStyle = lipgloss.NewStyle().
@@ -29,7 +29,7 @@ var (
 
 	HeaderBrand = lipgloss.NewStyle().
 			Bold(true).
-			Foreground(ColorPrimary).
+			Foreground(ColorAccent).
 			SetString("JAWAD.OS")
 
 	StatusOnline = lipgloss.NewStyle().
@@ -43,12 +43,12 @@ var (
 	// Section Titles & Subtitles
 	TitleStyle = lipgloss.NewStyle().
 			Bold(true).
-			Foreground(ColorSecondary).
+			Foreground(ColorText).
 			MarginBottom(1)
 
 	SectionHeader = lipgloss.NewStyle().
 			Bold(true).
-			Foreground(ColorSecondary)
+			Foreground(ColorText)
 
 	SubtitleStyle = lipgloss.NewStyle().
 			Foreground(ColorMuted)
@@ -61,12 +61,12 @@ var (
 	PanelStyle = lipgloss.NewStyle().
 			Border(lipgloss.RoundedBorder()).
 			BorderForeground(ColorBorder).
-			Padding(1, 2)
+			Padding(0, 1)
 
 	ActivePanelStyle = lipgloss.NewStyle().
 				Border(lipgloss.RoundedBorder()).
-				BorderForeground(ColorSecondary).
-				Padding(1, 2)
+				BorderForeground(ColorAccent).
+				Padding(0, 1)
 
 	// Navigation & List Item Styles
 	ItemNumberStyle = lipgloss.NewStyle().
@@ -81,11 +81,11 @@ var (
 			Foreground(ColorMuted)
 
 	SelectedItemStyle = lipgloss.NewStyle().
-				Foreground(ColorPrimary).
+				Foreground(ColorAccent).
 				Bold(true)
 
 	SelectedRowStyle = lipgloss.NewStyle().
-				Foreground(ColorPrimary).
+				Foreground(ColorAccent).
 				Bold(true)
 
 	UnselectedRowStyle = lipgloss.NewStyle().
@@ -105,27 +105,21 @@ var (
 
 	// Status / Badge Styles
 	Badge = lipgloss.NewStyle().
-		Foreground(ColorDarkBg).
-		Background(ColorSecondary).
-		Padding(0, 1).
+		Foreground(ColorSecondary).
 		Bold(true)
 
 	StatusBadge = lipgloss.NewStyle().
-			Foreground(ColorDarkBg).
-			Background(ColorAccent).
-			Padding(0, 1).
+			Foreground(ColorAccent).
 			Bold(true)
 
 	// Code & Tag Styles
 	TagStyle = lipgloss.NewStyle().
 			Foreground(ColorSecondary).
-			Background(ColorCodeBg).
-			Padding(0, 1).
 			MarginRight(1)
 
 	// Command Prompt Styles
 	CommandPromptStyle = lipgloss.NewStyle().
-				Foreground(ColorSecondary).
+				Foreground(ColorAccent).
 				Bold(true)
 
 	CommandInputStyle = lipgloss.NewStyle().
@@ -141,3 +135,4 @@ var (
 			Foreground(ColorError).
 			Bold(true)
 )
+

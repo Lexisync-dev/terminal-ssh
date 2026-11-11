@@ -76,17 +76,15 @@ func NeofetchOutput(user string, width int) string {
 	sep := theme.RenderDivider(36)
 
 	specs := []string{
-		theme.StyleBrand.Render("jawad@JAWAD.OS // WORKSTATION"),
+		theme.StyleBrand.Render("jawad@jawad-os"),
 		sep,
-		theme.RenderKeyValue("OS:", "JAWAD.OS v1.0 (Terminal Workstation)", 14),
-		theme.RenderKeyValue("RUNTIME:", "Golang 1.27+ (Charm Ecosystem)", 14),
-		theme.RenderKeyValue("KERNEL:", "Bubble Tea + Lip Gloss + Wish SSH", 14),
-		theme.RenderKeyValue("ARCH:", "Unidirectional Model-View-Update (Elm)", 14),
-		theme.RenderKeyValue("SHELL:", "jawad-cmd / wish-ssh", 14),
-		theme.RenderKeyValue("USER:", user, 14),
-		theme.RenderKeyValue("TERMINAL:", "xterm-256color // OSC 52 Enabled", 14),
-		theme.RenderKeyValue("MEMORY:", "Lightweight Goroutine Concurrency", 14),
-		theme.RenderKeyValue("STATUS:", theme.StyleStatusOnline.Render("ONLINE "+theme.GlyphDot+" Exploring Systems"), 14),
+		theme.RenderKeyValue("OS", "JAWAD.OS v1.0 (Terminal)", 12),
+		theme.RenderKeyValue("RUNTIME", "Go (Charm Ecosystem)", 12),
+		theme.RenderKeyValue("FRAMEWORK", "Bubble Tea · Lip Gloss", 12),
+		theme.RenderKeyValue("SSH", "Wish SSH Server", 12),
+		theme.RenderKeyValue("ARCH", "Model-View-Update (Elm)", 12),
+		theme.RenderKeyValue("USER", user, 12),
+		theme.RenderKeyValue("STATUS", theme.StyleStatusOnline.Render("ONLINE "+theme.GlyphDot), 12),
 	}
 
 	specBlock := strings.Join(specs, "\n")
@@ -106,7 +104,7 @@ func SudoHireOutput(width int) string {
 	prompt := lipgloss.NewStyle().
 		Bold(true).
 		Foreground(theme.ColorAccentAmber).
-		Render("[sudo] authenticating engineering recruiter: **********")
+		Render("[sudo] authenticating recruiter: **********")
 
 	granted := theme.StyleStatusOnline.Render("Authentication successful. Clearance Level 1 Granted.")
 
@@ -130,7 +128,7 @@ func SudoHireOutput(width int) string {
 		body,
 	)
 
-	return theme.RenderWorkstationPanel("RECRUITER CLEARANCE // CONFIDENTIAL", content, width, 0, true)
+	return theme.RenderWorkstationPanel("RECRUITER CLEARANCE", content, width, 0, true)
 }
 
 // SecretDeveloperMessage generates a personal note from Jawad.
@@ -152,7 +150,7 @@ func SecretDeveloperMessage(width int) string {
 		body,
 	)
 
-	return theme.RenderWorkstationPanel("BUILDER'S LOG // DEVELOPER NOTE", content, width, 0, true)
+	return theme.RenderWorkstationPanel("DEVELOPER NOTE", content, width, 0, true)
 }
 
 // DateOutput returns formatted local timestamp.

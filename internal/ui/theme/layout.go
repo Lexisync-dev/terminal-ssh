@@ -70,24 +70,23 @@ func CalculateLayout(width, height int) LayoutGeometry {
 	}
 }
 
-// RenderWorkstationHeader produces the institutional top status bar.
+// RenderWorkstationHeader produces the clean top status bar.
 func RenderWorkstationHeader(width int, sectionName string, sessionUser string, timestamp string) string {
 	leftBrand := StyleBrand.Render("JAWAD.OS")
-	leftDivider := StyleBodyMuted.Render(" | ")
-	leftSub := StyleIdentity.Render("ENGINEERING WORKSTATION")
 
-	if sectionName != "" {
-		secTag := StyleSectionHeading.Render(" // " + strings.ToUpper(sectionName))
-		leftSub = leftSub + secTag
+	var left string
+	if sectionName != "" && sectionName != "WORKSTATION" {
+		secTag := StyleSectionHeading.Render(strings.ToUpper(sectionName))
+		left = leftBrand + StyleBodyMuted.Render("  /  ") + secTag
+	} else {
+		left = leftBrand + StyleBodyMuted.Render("  /  ") + StyleIdentity.Render("WORKSTATION")
 	}
-
-	left := leftBrand + leftDivider + leftSub
 
 	statusDot := StyleStatusOnline.Render("ONLINE " + GlyphDot)
 	rightParts := []string{statusDot}
 
 	if sessionUser != "" {
-		userTag := StyleBodyMuted.Render("USER: ") + StyleMetaValue.Render(sessionUser)
+		userTag := StyleBodyMuted.Render("user: ") + StyleMetaValue.Render(sessionUser)
 		rightParts = append(rightParts, userTag)
 	}
 
@@ -96,7 +95,7 @@ func RenderWorkstationHeader(width int, sectionName string, sessionUser string, 
 		rightParts = append(rightParts, timeTag)
 	}
 
-	right := strings.Join(rightParts, StyleBodyMuted.Render(" | "))
+	right := strings.Join(rightParts, StyleBodyMuted.Render("  ·  "))
 
 	gap := width - lipgloss.Width(left) - lipgloss.Width(right)
 	if gap < 2 {
@@ -109,14 +108,14 @@ func RenderWorkstationHeader(width int, sectionName string, sessionUser string, 
 	return line + "\n" + divider
 }
 
-// RenderWorkstationNav renders the compact numbered navigation bar.
+// RenderWorkstationNav renders the minimalist navigation bar.
 func RenderWorkstationNav(width int, items []string, activeIndex int) string {
 	var rendered []string
 	for i, item := range items {
 		if i == activeIndex {
-			rendered = append(rendered, NavTabActiveStyle.Render(item))
+			rendered = append(rendered, NavTabActiveStyle.Render("● "+item))
 		} else {
-			rendered = append(rendered, NavTabStyle.Render(item))
+			rendered = append(rendered, NavTabStyle.Render("  "+item))
 		}
 	}
 
@@ -126,24 +125,24 @@ func RenderWorkstationNav(width int, items []string, activeIndex int) string {
 	return navLine + "\n" + divider
 }
 
-// RenderWorkstationCommandBar renders the persistent Bloomberg command bar.
+// RenderWorkstationCommandBar renders the minimalist command bar.
 func RenderWorkstationCommandBar(width int, isCommandMode bool, commandInput string, statusMessage string) string {
 	prompt := CommandPromptStyle.Render("COMMAND > ")
 
 	if isCommandMode {
 		input := CommandInputStyle.Render(commandInput)
-		cursor := StyleBrand.Render("█")
-		hint := StyleBodyMuted.Render("  [ENTER to execute, ESC to cancel]")
+		cursor := StyleBrand.Render("▎")
+		hint := StyleBodyMuted.Render("   (enter to execute, esc to cancel)")
 		line := prompt + input + cursor + hint
 		return RenderDivider(width) + "\n" + line
 	}
 
 	if statusMessage != "" {
-		msg := StyleSectionHeading.Render(GlyphBullet + " " + statusMessage)
+		msg := StyleSectionHeading.Render("› " + statusMessage)
 		return RenderDivider(width) + "\n" + msg
 	}
 
-	idleHint := StyleBodyMuted.Render("Press ':' to enter command mode, '?' for help")
+	idleHint := StyleBodyMuted.Render("type ':' for command mode, '?' for help")
 	return RenderDivider(width) + "\n" + prompt + idleHint
 }
 
@@ -156,7 +155,7 @@ func RenderWorkstationFooter(width int, shortcuts [][]string) string {
 		badges = append(badges, fmt.Sprintf("%s %s", k, d))
 	}
 
-	line := strings.Join(badges, StyleBodyMuted.Render(" | "))
+	line := strings.Join(badges, StyleBodyMuted.Render("  ·  "))
 	return RenderDivider(width) + "\n" + line
 }
 
