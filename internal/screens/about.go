@@ -91,24 +91,24 @@ func (m AboutModel) renderContent(width int) string {
 		grid = lipgloss.JoinVertical(lipgloss.Left, col1Block, "", col2Block)
 	}
 
-	idPanel := theme.RenderWorkstationPanel("PERSONNEL RECORD // PROFILE", grid, width, 0, false)
+	idPanel := theme.RenderWorkstationPanel("PROFILE", grid, width, 0, false)
 	b.WriteString(idPanel + "\n\n")
 
 	// Engineering Philosophy
 	bioBody := theme.StyleBody.Width(width - 6).Render(m.cfg.Profile.Bio)
-	bioPanel := theme.RenderWorkstationPanel("ENGINEERING PHILOSOPHY // HOW I BUILD", bioBody, width, 0, false)
+	bioPanel := theme.RenderWorkstationPanel("PHILOSOPHY", bioBody, width, 0, false)
 	b.WriteString(bioPanel + "\n\n")
 
 	// Active Domains of Exploration
 	var areaRows []string
 	for _, area := range m.cfg.Direction.Areas {
-		title := theme.StyleBrand.Render("▸ " + strings.ToUpper(area.Title))
+		title := theme.StyleBrand.Render("· " + strings.ToUpper(area.Title))
 		desc := theme.StyleBodyMuted.PaddingLeft(2).Width(width - 8).Render(area.Description)
 		areaRows = append(areaRows, fmt.Sprintf("%s\n%s", title, desc))
 	}
 
 	directionContent := strings.Join(areaRows, "\n\n")
-	dirPanel := theme.RenderWorkstationPanel("ACTIVE TECHNICAL DIRECTIONS", directionContent, width, 0, false)
+	dirPanel := theme.RenderWorkstationPanel("AREAS OF EXPLORATION", directionContent, width, 0, false)
 	b.WriteString(dirPanel + "\n")
 
 	return b.String()

@@ -67,24 +67,24 @@ func (m SkillsModel) renderContent(width int) string {
 
 	// Top Taxonomy Notice
 	noticeText := theme.StyleBodyMuted.Width(width - 6).Render(
-		"SYS.TAXONOMY // Active working stack and engineering topics under exploration. No arbitrary percentages.",
+		"Active working stack and engineering topics under exploration.\nNo arbitrary percentages.",
 	)
-	noticePanel := theme.RenderWorkstationPanel("TAXONOMY POLICY", noticeText, width, 0, false)
+	noticePanel := theme.RenderWorkstationPanel("STACK & TAXONOMY", noticeText, width, 0, false)
 	b.WriteString(noticePanel + "\n\n")
 
-	// Render Each Category as a Precision Workstation Panel
+	// Render Each Category as a Minimalist Panel
 	for _, category := range m.cfg.Skills.Categories {
 		desc := theme.StyleBodyMuted.Width(width - 6).Render(category.Description)
 		tags := theme.RenderTags(category.Items)
 
 		content := lipgloss.JoinVertical(
 			lipgloss.Left,
-			desc,
-			"",
 			tags,
+			"",
+			desc,
 		)
 
-		panel := theme.RenderWorkstationPanel("CATEGORY // "+strings.ToUpper(category.Name), content, width, 0, false)
+		panel := theme.RenderWorkstationPanel(strings.ToUpper(category.Name), content, width, 0, false)
 		b.WriteString(panel + "\n\n")
 	}
 

@@ -89,7 +89,7 @@ func (m DashboardModel) View() string {
 	return m.renderCompactDashboard(geo)
 }
 
-// renderWideDashboard renders the 70/30 dual-panel Bloomberg workstation layout.
+// renderWideDashboard renders the 70/30 dual-panel minimalist dashboard layout.
 func (m DashboardModel) renderWideDashboard(geo theme.LayoutGeometry) string {
 	mainWidth := geo.MainWidth
 	sideWidth := geo.SideWidth
@@ -97,7 +97,7 @@ func (m DashboardModel) renderWideDashboard(geo theme.LayoutGeometry) string {
 	// ---------------- Left Panel: Identity, Focus & Featured Project ----------------
 	identityTitle := theme.StyleIdentity.Bold(true).Render(strings.ToUpper(m.cfg.Profile.Name))
 	identityRole := theme.StyleSectionHeading.Render(m.cfg.Profile.Title)
-	identityTagline := theme.StyleBodyMuted.Italic(true).Render(m.cfg.Profile.Tagline)
+	identityTagline := theme.StyleBodyMuted.Render(m.cfg.Profile.Tagline)
 
 	identitySection := lipgloss.JoinVertical(
 		lipgloss.Left,
@@ -107,17 +107,17 @@ func (m DashboardModel) renderWideDashboard(geo theme.LayoutGeometry) string {
 		identityTagline,
 	)
 
-	// Current Engineering Focus grid
-	focusHeader := theme.StylePanelHeading.Render("CURRENT FOCUS AREAS")
+	// Current Focus areas
+	focusHeader := theme.StylePanelHeading.Render("CURRENT FOCUS")
 	focusCol1 := lipgloss.JoinVertical(
 		lipgloss.Left,
-		theme.StyleBody.Render("▸ Backend engineering"),
-		theme.StyleBody.Render("▸ Workflow automation"),
+		theme.StyleBody.Render("· Backend engineering"),
+		theme.StyleBody.Render("· Workflow automation"),
 	)
 	focusCol2 := lipgloss.JoinVertical(
 		lipgloss.Left,
-		theme.StyleBody.Render("▸ System design & architecture"),
-		theme.StyleBody.Render("▸ Distributed systems"),
+		theme.StyleBody.Render("· System design & architecture"),
+		theme.StyleBody.Render("· Distributed systems"),
 	)
 	focusGrid := lipgloss.JoinHorizontal(lipgloss.Top, focusCol1, "    ", focusCol2)
 	focusSection := lipgloss.JoinVertical(lipgloss.Left, focusHeader, "", focusGrid)
@@ -126,15 +126,12 @@ func (m DashboardModel) renderWideDashboard(geo theme.LayoutGeometry) string {
 	var featuredSection string
 	if len(m.cfg.Projects) > 0 {
 		fp := m.cfg.Projects[0]
-		fpStatus := theme.StatusPillDev.Render(fp.Status)
+		fpStatus := theme.StatusPillDev.Render("[" + fp.Status + "]")
 		fpTitle := theme.StyleIdentity.Render(fp.Name)
 		fpTop := lipgloss.JoinHorizontal(lipgloss.Center, theme.StylePanelHeading.Render("FEATURED PROJECT"), "  ", fpStatus)
 
 		fpStack := theme.RenderTags(fp.Stack)
 		fpDesc := theme.StyleBody.Width(mainWidth - 6).Render(fp.Description)
-		fpPipe := lipgloss.NewStyle().
-			Foreground(theme.ColorInfoCyan).
-			Render("Pipeline Concept: [GitHub Issue Trigger] ──▶ [Workflow Engine] ──▶ [AI Summary] ──▶ [Slack Webhook]")
 		fpActionHint := theme.StyleBodyMuted.Render("Select '02 PROJECTS' or enter ':projects' for full technical architecture.")
 
 		featuredSection = lipgloss.JoinVertical(
@@ -146,8 +143,6 @@ func (m DashboardModel) renderWideDashboard(geo theme.LayoutGeometry) string {
 			fpStack,
 			"",
 			fpDesc,
-			"",
-			fpPipe,
 			"",
 			fpActionHint,
 		)
@@ -162,15 +157,14 @@ func (m DashboardModel) renderWideDashboard(geo theme.LayoutGeometry) string {
 		"\n"+featuredSection,
 	)
 
-	leftPanel := theme.RenderWorkstationPanel("WORKSTATION OVERVIEW", leftBody, mainWidth, 0, false)
+	leftPanel := theme.RenderWorkstationPanel("OVERVIEW", leftBody, mainWidth, 0, false)
 
 	// ---------------- Right Panel: Profile Data & Module Directory ----------------
-	// Profile Data
-	profHeader := theme.StylePanelHeading.Render("PROFILE DATA")
-	locRow := theme.RenderKeyValue("LOCATION:", m.cfg.Profile.Location, 12)
-	eduRow := theme.RenderKeyValue("EDUCATION:", m.cfg.Profile.Education, 12)
-	dirRow := theme.RenderKeyValue("DIRECTION:", "Full-Stack / Backend", 12)
-	intRow := theme.RenderKeyValue("INTERESTS:", "Systems, Automation, Infra", 12)
+	profHeader := theme.StylePanelHeading.Render("PROFILE")
+	locRow := theme.RenderKeyValue("LOCATION", m.cfg.Profile.Location, 12)
+	eduRow := theme.RenderKeyValue("EDUCATION", m.cfg.Profile.Education, 12)
+	dirRow := theme.RenderKeyValue("DIRECTION", "Full-Stack / Backend", 12)
+	intRow := theme.RenderKeyValue("INTERESTS", "Systems, Automation, Infra", 12)
 
 	profSection := lipgloss.JoinVertical(
 		lipgloss.Left,
@@ -183,7 +177,7 @@ func (m DashboardModel) renderWideDashboard(geo theme.LayoutGeometry) string {
 	)
 
 	// Module Directory
-	dirHeader := theme.StylePanelHeading.Render("SYSTEM DIRECTORY")
+	dirHeader := theme.StylePanelHeading.Render("DIRECTORY")
 	var menuLines []string
 	for i, item := range ui.MenuItems {
 		isSelected := i == m.selected
@@ -193,7 +187,7 @@ func (m DashboardModel) renderWideDashboard(geo theme.LayoutGeometry) string {
 		itemDesc := theme.StyleBodyMuted.Render(item.Subtitle)
 
 		if isSelected {
-			prefix = theme.StyleBrand.Render("▸ ")
+			prefix = theme.StyleBrand.Render("● ")
 			itemNum = theme.StyleBrand.Render("[" + item.Number + "]")
 			itemTitle = theme.StyleBrand.Width(11).Render(item.Title)
 			itemDesc = theme.StyleBody.Render(item.Subtitle)
@@ -228,7 +222,7 @@ func (m DashboardModel) renderCompactDashboard(geo theme.LayoutGeometry) string 
 
 	identityTitle := theme.StyleIdentity.Bold(true).Render(strings.ToUpper(m.cfg.Profile.Name))
 	identityRole := theme.StyleSectionHeading.Render(m.cfg.Profile.Title)
-	location := theme.StyleBodyMuted.Render(m.cfg.Profile.Location + " • " + m.cfg.Profile.Education)
+	location := theme.StyleBodyMuted.Render(m.cfg.Profile.Location + " · " + m.cfg.Profile.Education)
 
 	identitySection := lipgloss.JoinVertical(
 		lipgloss.Left,
@@ -242,15 +236,15 @@ func (m DashboardModel) renderCompactDashboard(geo theme.LayoutGeometry) string 
 		lipgloss.Left,
 		theme.StylePanelHeading.Render("CURRENT FOCUS"),
 		"",
-		theme.StyleBody.Render("• Backend engineering  • System design"),
-		theme.StyleBody.Render("• Workflow automation  • Distributed systems"),
+		theme.StyleBody.Render("· Backend engineering  · System design"),
+		theme.StyleBody.Render("· Workflow automation  · Distributed systems"),
 	)
 
 	// Featured Project
 	var featuredSection string
 	if len(m.cfg.Projects) > 0 {
 		fp := m.cfg.Projects[0]
-		fpStatus := theme.StatusPillDev.Render(fp.Status)
+		fpStatus := theme.StatusPillDev.Render("[" + fp.Status + "]")
 		featuredSection = lipgloss.JoinVertical(
 			lipgloss.Left,
 			lipgloss.JoinHorizontal(lipgloss.Center, theme.StylePanelHeading.Render("FEATURED: "+fp.Name), " ", fpStatus),
@@ -267,7 +261,7 @@ func (m DashboardModel) renderCompactDashboard(geo theme.LayoutGeometry) string 
 		isSelected := i == m.selected
 		prefix := "  "
 		if isSelected {
-			prefix = theme.StyleBrand.Render("▸ ")
+			prefix = theme.StyleBrand.Render("● ")
 		}
 		num := theme.StyleBrand.Render("[" + item.Number + "]")
 		title := theme.StyleBody.Width(11).Render(item.Title)
@@ -286,5 +280,5 @@ func (m DashboardModel) renderCompactDashboard(geo theme.LayoutGeometry) string 
 		"\n"+theme.StylePanelHeading.Render("SELECT MODULE")+"\n\n"+strings.Join(menuLines, "\n"),
 	)
 
-	return theme.RenderWorkstationPanel("WORKSTATION OVERVIEW", content, width, 0, false)
+	return theme.RenderWorkstationPanel("OVERVIEW", content, width, 0, false)
 }

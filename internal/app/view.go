@@ -31,34 +31,33 @@ func (m Model) View() string {
 	var shortcuts [][]string
 	if m.CurrentScreen == ui.ScreenDashboard {
 		shortcuts = [][]string{
-			{"F1/?", "HELP"},
-			{"↑↓", "NAVIGATE"},
-			{"ENTER", "SELECT"},
-			{"1-6", "JUMP"},
-			{":", "COMMAND"},
-			{"ESC", "BACK"},
-			{"Q", "EXIT"},
+			{"↑↓", "navigate"},
+			{"enter", "select"},
+			{"1-6", "jump"},
+			{":", "command"},
+			{"?", "help"},
+			{"q", "exit"},
 		}
 	} else if m.CurrentScreen == ui.ScreenHelp {
 		shortcuts = [][]string{
-			{"ESC", "CLOSE"},
-			{":", "COMMAND"},
-			{"Q", "EXIT"},
+			{"esc", "close"},
+			{":", "command"},
+			{"q", "exit"},
 		}
 	} else {
 		shortcuts = [][]string{
-			{"F1/?", "HELP"},
-			{"↑↓", "SCROLL"},
-			{"ESC", "BACK"},
-			{":", "COMMAND"},
-			{"Q", "EXIT"},
+			{"↑↓", "scroll"},
+			{"esc", "back"},
+			{":", "command"},
+			{"?", "help"},
+			{"q", "exit"},
 		}
 	}
 	footer := theme.RenderWorkstationFooter(geo.TotalWidth, shortcuts)
 
 	// Modal overlay takes center stage if active (for easter eggs & system alerts)
 	if m.ModalActive {
-		dismissHint := theme.StyleBodyMuted.Render("\n  [Press any key or ESC to return]")
+		dismissHint := theme.StyleBodyMuted.Render("\n\n  [Press any key or ESC to return]")
 
 		modalBox := theme.RenderWorkstationPanel(m.ModalTitle, m.ModalContent+dismissHint, geo.InnerWidth, 0, true)
 
@@ -146,15 +145,15 @@ func (m Model) renderHelpScreen(width int) string {
 		b.WriteString("  " + cmdName + " " + cmdDesc + "\n")
 	}
 
-	return theme.RenderWorkstationPanel("HELP & WORKSTATION REFERENCE", b.String(), width, 0, false)
+	return theme.RenderWorkstationPanel("HELP & SHORTCUTS", b.String(), width, 0, false)
 }
 
 func (m Model) renderPlaceholderScreen(width int) string {
 	screenName := m.CurrentScreen.String()
 	title := theme.StyleSectionHeading.Render("MODULE: " + strings.ToUpper(screenName))
 	desc := theme.StyleBody.Render("Active screen view.")
-	hint := theme.StyleBodyMuted.Render("Press ESC to return to Dashboard.")
+	hint := theme.StyleBodyMuted.Render("Press ESC to return.")
 
 	content := lipgloss.JoinVertical(lipgloss.Left, title, "", desc, "", hint)
-	return theme.RenderWorkstationPanel("MODULE VIEW", content, width, 0, false)
+	return theme.RenderWorkstationPanel("VIEW", content, width, 0, false)
 }

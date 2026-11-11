@@ -12,8 +12,8 @@ func BrandBanner(compact bool) string {
 	if compact {
 		return lipgloss.NewStyle().
 			Bold(true).
-			Foreground(ColorPrimary).
-			Render("┌─ JAWAD.OS ────────────────────────┐")
+			Foreground(ColorAccent).
+			Render("╭─ JAWAD.OS ────────────────────────╮")
 	}
 
 	banner := `  ██╗ █████╗ ██╗    ██╗ █████╗ ██████╗       ██████╗ ███████╗
@@ -24,7 +24,7 @@ func BrandBanner(compact bool) string {
  ╚══╝╚═╝  ╚═╝ ╚══╝╚══╝ ╚═╝  ╚═╝╚═════╝       ╚═════╝ ╚══════╝`
 
 	return lipgloss.NewStyle().
-		Foreground(ColorPrimary).
+		Foreground(ColorAccent).
 		Bold(true).
 		Render(banner)
 }
