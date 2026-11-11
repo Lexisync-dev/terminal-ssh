@@ -1,0 +1,24 @@
+services:
+  jawad-os:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    image: jawad-os:latest
+    container_name: jawad-os
+    restart: unless-stopped
+    ports:
+      # Expose Wish SSH server port (Map host 2222 -> container 2222, or 22:2222 on dedicated VPS)
+      - "2222:2222"
+    environment:
+      - PORT=2222
+      - SSH_HOST=0.0.0.0
+      - SSH_KEY_PATH=/app/.ssh/id_ed25519
+    volumes:
+      # Persist auto-generated or mounted host keys across container restarts
+      - ssh_keys:/app/.ssh
+      # Optional: bind mount portfolio.yaml for hot updates without rebuilding
+      - ./configs/portfolio.yaml:/app/configs/portfolio.yaml:ro
+
+volumes:
+  ssh_keys:
+    driver: local

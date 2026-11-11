@@ -1,0 +1,140 @@
+profile:
+  name: "Jawad Ahmad"
+  title: "Software Engineer in Progress"
+  positioning: "Aspiring Full-Stack Software Engineer"
+  location: "Pakistan"
+  education: "Computer Science student"
+  tagline: "Building software. Exploring systems. Understanding how things work."
+  bio: >
+    I'm a computer science student interested in building software that solves real problems.
+    I enjoy exploring backend systems, full-stack development, workflow automation, APIs, and system architecture.
+    I'm particularly interested in understanding how things work beneath the surface — from databases and distributed systems to infrastructure and automation.
+    I learn by building, experimenting, breaking things, and figuring out how to make them work better.
+
+direction:
+  summary: "Current areas of professional interest and active engineering exploration:"
+  areas:
+    - title: "Full-Stack Software Engineering"
+      description: "Developing complete, cohesive web applications from backend APIs to responsive user interfaces."
+    - title: "Backend Engineering"
+      description: "Crafting robust, scalable server architectures, data models, and performant request lifecycles."
+    - title: "System Design & Architecture"
+      description: "Studying trade-offs in distributed data, service boundaries, reliability, and modularity."
+    - title: "Workflow Automation"
+      description: "Designing trigger-action pipelines, job scheduling, and event-driven architectures."
+    - title: "Distributed Systems"
+      description: "Understanding consensus, replication, message passing, and fault tolerance."
+    - title: "AI-Powered Applications"
+      description: "Integrating intelligent processing and LLM capabilities into deterministic backend workflows."
+    - title: "Infrastructure & DevOps"
+      description: "Containerization with Docker, process orchestration, CI/CD, and reproducible environments."
+
+skills:
+  categories:
+    - name: "Programming & Backend"
+      description: "Languages and runtimes for server-side engineering"
+      items:
+        - "Go"
+        - "JavaScript"
+        - "TypeScript"
+        - "Node.js"
+    - name: "Frontend"
+      description: "Client-side interfaces and modern web application frameworks"
+      items:
+        - "React"
+        - "Next.js"
+    - name: "Databases & Infrastructure"
+      description: "Storage, caching, and containerized runtime infrastructure"
+      items:
+        - "PostgreSQL"
+        - "Redis"
+        - "Docker"
+    - name: "Concepts Under Exploration"
+      description: "System engineering principles and architectural patterns actively studied"
+      items:
+        - "REST APIs"
+        - "Webhooks"
+        - "Background jobs"
+        - "Queue-based processing"
+        - "Workflow orchestration"
+        - "Authentication and authorization"
+        - "System design"
+        - "Distributed systems"
+
+projects:
+  - id: "workflow-engine"
+    name: "Workflow Automation Platform"
+    tagline: "Trigger-action automation engine inspired by n8n and Zapier"
+    status: "In Development"
+    description: >
+      A workflow automation platform designed to let users connect triggers, actions, and integrations to automate repetitive tasks through configurable workflows.
+    conceptual_example: >
+      "When a GitHub issue is created, trigger a workflow, process the issue, generate an AI summary, and send the summary to Slack."
+    stack:
+      - "Go"
+      - "React"
+      - "TypeScript"
+      - "PostgreSQL"
+      - "Redis"
+      - "Docker"
+    architecture_areas:
+      - "Workflow representation and storage"
+      - "Trigger management"
+      - "Workflow execution engine"
+      - "Background job processing"
+      - "Queue architecture"
+      - "External integrations"
+      - "Execution history and logging"
+      - "Error handling and retries"
+    decisions:
+      - "Chose Go for the execution engine to leverage goroutine-based concurrency and low runtime overhead."
+      - "Designed a directed acyclic graph (DAG) representation for workflow node execution order."
+      - "Separated trigger intake from worker execution using Redis-backed queues for reliable job delivery."
+    challenges:
+      - "Ensuring idempotent execution when external services or network steps fail midway."
+      - "Designing an extensible schema for arbitrary action inputs/outputs while keeping state predictable."
+    learnings:
+      - "Deepened understanding of distributed task queues and retry backoff strategies."
+      - "Appreciation for strict state machine boundaries when coordinating asynchronous steps."
+
+experience:
+  summary: "Pursuing my first formal software engineering opportunity while building hands-on projects."
+  status: "Actively seeking Software Engineer / Full-Stack / Backend opportunities"
+  highlights:
+    - title: "Independent Freelance Projects"
+      focus: "Applied Software Development"
+      description: >
+        Worked on freelance web and software projects, focusing on building practical applications, implementing business logic, and shipping functional solutions for real-world user needs.
+    - title: "Personal Engineering & Systems Exploration"
+      focus: "Self-Directed System Building"
+      description: >
+        Invested extensive time in understanding computer science fundamentals, building backend prototypes, exploring distributed system concepts, and creating terminal-based tooling.
+
+interests:
+  title: "Beyond the Terminal"
+  subtitle: "Personal passions, curiosity, and creative outlets"
+  items:
+    - name: "Poetry"
+      icon: "✒"
+      tagline: "Rhythm, expression, and thought"
+      description: "I enjoy reading and reflecting on poetry — appreciating the economy of language, structure, and emotional resonance."
+    - name: "Superbikes"
+      icon: "⚡"
+      tagline: "High-performance two-wheeled engineering"
+      description: "A strong passion for superbikes, motorcycle dynamics, performance tuning, and the engineering behind track and street machines."
+    - name: "Mechanical Engineering"
+      icon: "⚙"
+      tagline: "Physical systems and tactile mechanics"
+      description: "Fascinated by mechanical systems, gear trains, engines, and thermodynamics. Looking forward to exploring personal bike builds and hands-on mechanical projects."
+    - name: "Curiosity & Exploration"
+      icon: "🔍"
+      tagline: "Understanding how things work beneath the surface"
+      description: "I love learning what other builders and engineers are creating, deconstructing complex systems, and understanding the 'why' behind architectural choices."
+
+contact:
+  prompt: "Let's connect and discuss software engineering, projects, or opportunities."
+  github: "https://github.com/lexisync"
+  linkedin: ""
+  email: ""
+  website: ""
+  location: "Pakistan"

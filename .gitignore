@@ -1,0 +1,12 @@
+# Binaries
+bin/
+jawad
+jawad-os
+
+# Coverage & Test artifacts
+coverage.out
+*.test
+
+# Local keys
+.ssh/id_*
+!.ssh/id_*.pub

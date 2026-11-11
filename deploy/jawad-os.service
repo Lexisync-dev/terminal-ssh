@@ -1,0 +1,25 @@
+[Unit]
+Description=JAWAD.OS - Interactive Terminal Developer Portfolio (Wish SSH Server)
+After=network.target
+
+[Service]
+Type=simple
+User=jawad
+Group=jawad
+WorkingDirectory=/opt/jawad-os
+ExecStart=/opt/jawad-os/jawad -ssh -port 2222 -config /opt/jawad-os/configs/portfolio.yaml
+Restart=always
+RestartSec=5
+LimitNOFILE=65536
+StandardOutput=journal
+StandardError=journal
+
+# Security Sandboxing
+ProtectSystem=strict
+ProtectHome=true
+ReadWritePaths=/opt/jawad-os/.ssh
+PrivateTmp=true
+NoNewPrivileges=true
+
+[Install]
+WantedBy=multi-user.target
